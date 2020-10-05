@@ -8,6 +8,7 @@ import seedu.address.logic.commands.contact.DeleteCommand;
 import seedu.address.logic.commands.contact.EditCommand;
 import seedu.address.logic.commands.contact.FindCommand;
 import seedu.address.logic.commands.contact.ListCommand;
+import seedu.address.logic.commands.contact.RemarkCommand;
 import seedu.address.logic.parser.GroupCommandsParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -40,6 +41,9 @@ public class ContactCommandsParser implements GroupCommandsParser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case RemarkCommand.COMMAND_WORD:
+            return new RemarkCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
