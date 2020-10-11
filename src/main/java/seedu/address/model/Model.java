@@ -113,6 +113,16 @@ public interface Model {
     String listTags();
 
     /**
+     * Lists all contacts associated with {@code target} tag.
+     */
+    void findByContactTag(Tag target);
+
+    /**
+     * Lists all sales associated with {@code target} tag.
+     */
+    void findBySaleTag(Tag target);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */

@@ -162,11 +162,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds the specified tag to StonksBook.
-     * If the tag already exists in StonksBook, no action will be performed.
+     * Adds the specified contact tag to StonksBook.
+     * If the tag already exists in the contact tag list, no action will be performed.
      */
     public void addContactTag(Tag tag) {
         contactTags.add(tag);
+    }
+
+    /**
+     * Adds the specified sale tag to StonksBook.
+     * If the tag already exists in the sale tag list, no action will be performed.
+     */
+    public void addSaleTag(Tag tag) {
+        saleTags.add(tag);
     }
 
     /**

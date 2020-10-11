@@ -2,6 +2,7 @@ package seedu.address.logic.commands.tag;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -34,6 +35,14 @@ public class FindCommand extends Command {
         List<Tag> contactTagList = model.getAddressBook().getContactTagList();
         List<Tag> saleTagList = model.getAddressBook().getSaleTagList();
 
+        if (targetIndex.getOneBased() > contactTagList.size() + saleTagList.size() || targetIndex.getOneBased() < 0) {
+            throw new CommandException(Messages.MESSAGE_INVALID_TAG_DISPLAYED_INDEX);
+        }
+
+        Tag tagToFind;
+        if (targetIndex.getOneBased() > contactTagList.size()) {
+            tagToFind = saleTagList.get(targetIndex.getZeroBased());
+        }
         return null;
     }
 }

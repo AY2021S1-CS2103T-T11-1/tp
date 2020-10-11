@@ -249,6 +249,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void findByContactTag(Tag target) {
+
+    }
+
+    @Override
+    public void findBySaleTag(Tag target) {
+
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {
