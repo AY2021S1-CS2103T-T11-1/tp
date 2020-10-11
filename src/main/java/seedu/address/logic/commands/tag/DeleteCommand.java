@@ -1,7 +1,6 @@
 package seedu.address.logic.commands.tag;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -53,7 +52,6 @@ public class DeleteCommand extends Command {
             tagToDelete = contactTagList.get(targetIndex.getZeroBased());
             model.deleteContactTag(tagToDelete);
         }
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_DELETE_TAG_SUCCESS, tagToDelete));
     }
 
