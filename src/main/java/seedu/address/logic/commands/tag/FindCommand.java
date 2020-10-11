@@ -41,8 +41,23 @@ public class FindCommand extends Command {
 
         Tag tagToFind;
         if (targetIndex.getOneBased() > contactTagList.size()) {
-            tagToFind = saleTagList.get(targetIndex.getZeroBased());
+            tagToFind = saleTagList.get(targetIndex.getZeroBased() - contactTagList.size());
+            return new CommandResult(String.format(Messages.MESSAGE_SALES_LISTED_OVERVIEW,
+                    model.findByContactTag(tagToFind)));
+        } else {
+            tagToFind = contactTagList.get(targetIndex.getZeroBased());
+            model.updateFilteredPersonList(p -> p.getTags().contains(tagToFind));
+            return new CommandResult(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
+                    model.findByContactTag(tagToFind)));
         }
-        return null;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        return (obj instanceof FindCommand) && targetIndex.equals(((FindCommand) obj).targetIndex);
     }
 }

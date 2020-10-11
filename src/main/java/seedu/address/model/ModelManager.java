@@ -249,13 +249,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void findByContactTag(Tag target) {
-
+    public int findByContactTag(Tag target) {
+        // TODO
+        return addressBook.findByContactTag(target);
     }
 
     @Override
-    public void findBySaleTag(Tag target) {
-
+    public int findBySaleTag(Tag target) {
+        // TODO
+        return addressBook.findBySaleTag(target);
     }
 
     @Override

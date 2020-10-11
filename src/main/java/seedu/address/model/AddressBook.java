@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.appointment.Appointment;
@@ -230,6 +231,17 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void sortTags() {
         contactTags.sort();
+    }
+
+    public int findByContactTag(Tag target) {
+        return (int) persons.asUnmodifiableObservableList()
+                .stream()
+                .filter(p -> p.getTags().contains(target)).count();
+    }
+
+    public int findBySaleTag(Tag target) {
+        // TODO
+        return 0;
     }
 
     //// appointment-level operations
