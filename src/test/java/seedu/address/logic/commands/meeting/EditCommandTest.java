@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MESSAGE_CALL_AM
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MESSAGE_CALL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MEETINGS;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBookInReverse;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
@@ -36,8 +37,10 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Meeting editedMeeting = new Meeting(GEORGE, new Message(VALID_MESSAGE_CALL_AMY),
-                TypicalDates.TYPICAL_DATE_3, TypicalDurations.TYPICAL_DURATION_ONE_HOUR);
+        model.updateFilteredMeetingList(PREDICATE_SHOW_ALL_MEETINGS);
+
+        Meeting editedMeeting = new Meeting(GEORGE, new Message(VALID_MESSAGE_CALL_AMY), TypicalDates.TYPICAL_DATE_3,
+                TypicalDurations.TYPICAL_DURATION_ONE_HOUR);
         EditMeetingDescriptor descriptor = new EditMeetingDescriptorBuilder()
                 // George appears as the 6th item
                 .withContactIndex(Index.fromZeroBased(6))
@@ -57,6 +60,8 @@ public class EditCommandTest {
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
+        model.updateFilteredMeetingList(PREDICATE_SHOW_ALL_MEETINGS);
+
         Index indexLastMeeting = Index.fromOneBased(model.getSortedMeetingList().size());
         Meeting lastMeeting = model.getSortedMeetingList().get(indexLastMeeting.getZeroBased());
 
@@ -81,6 +86,8 @@ public class EditCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
+        model.updateFilteredMeetingList(PREDICATE_SHOW_ALL_MEETINGS);
+
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ITEM, new EditMeetingDescriptor());
         Meeting editedMeeting = model.getSortedMeetingList().get(INDEX_FIRST_ITEM.getZeroBased());
 
@@ -93,6 +100,8 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicateMeetingUnfilteredList_failure() {
+        model.updateFilteredMeetingList(PREDICATE_SHOW_ALL_MEETINGS);
+
         Meeting firstMeeting = model.getSortedMeetingList().get(INDEX_FIRST_ITEM.getZeroBased());
         EditMeetingDescriptor descriptor = new EditMeetingDescriptorBuilder()
                 .withContactIndex(Index.fromZeroBased(model.getSortedPersonList().indexOf(firstMeeting.getPerson())))
@@ -107,6 +116,8 @@ public class EditCommandTest {
 
     @Test
     public void execute_invalidMeetingIndexUnfilteredList_failure() {
+        model.updateFilteredMeetingList(PREDICATE_SHOW_ALL_MEETINGS);
+
         Index outOfBoundIndex = Index.fromOneBased(model.getSortedMeetingList().size() + 1);
         EditMeetingDescriptor descriptor =
                 new EditMeetingDescriptorBuilder().withMessage(VALID_MESSAGE_CALL_BOB).build();
