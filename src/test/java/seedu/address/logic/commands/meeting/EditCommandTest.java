@@ -53,6 +53,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MEETING_SUCCESS, editedMeeting);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.updateFilteredMeetingList(PREDICATE_SHOW_ALL_MEETINGS);
         expectedModel.setMeeting(model.getSortedMeetingList().get(0), editedMeeting);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -79,8 +80,8 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MEETING_SUCCESS, editedMeeting);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.updateFilteredMeetingList(PREDICATE_SHOW_ALL_MEETINGS);
         expectedModel.setMeeting(lastMeeting, editedMeeting);
-
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
@@ -94,7 +95,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MEETING_SUCCESS, editedMeeting);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-
+        expectedModel.updateFilteredMeetingList(PREDICATE_SHOW_ALL_MEETINGS);
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
